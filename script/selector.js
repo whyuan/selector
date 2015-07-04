@@ -158,7 +158,7 @@ angular.module("selector", [
       // 不使用indexOf，优化创建速度，需保证selectedItems有序
       var step = 0;
       for (var i = 0; i < this.items.length; i++) {
-        if (step < this.selectedItems.length && i < this.selectedItems[step]) {
+        if (step >= this.selectedItems.length || i < this.selectedItems[step]) {
           result.push(i);
         } else {
           step++;
