@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="selector">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>selector</title>
+    <script type="text/javascript" src="script/underscore.js"></script>
+    <script src="script/angular.js"></script>
+    <style>
+        .container {
+            width: 800px;
+            margin: 0 auto;
+        }
+        button {
+            border:none;
+            padding:5px;
+            cursor:pointer;
+            margin-right:5px;
+        }
+        button.option-unselected {
+            background: #4FC1EA;
+        }
+        button.option-selected {
+            background: #F45555;
+        }
+        button.option-disabled {
+            background: #E7E7E7;
+        }
+        .category {
+            margin-bottom: 10px;
+        }
+        .item {
+            padding: 5px 20px;
+        }
+        .item:nth-child(2n) {
+            background: #E5E5E5;
+        }
+        .item:nth-child(2n+1) {
+            background: #F0F0F0;
+        }
+        ul {
+            margin: 0;
+            list-style: none;
+        }
+    </style>
+</head>
+<body ng-controller="RootController">
+    <div class="container">
+        <div>
+            <div class="category" ng-repeat="category in CategoryBar.category">
+                {{ category.name }}:
+                <button ng-repeat="option in category.options"
+                        ng-class="optionState(category.name,option)"
+                        ng-disabled="isDisabledOption(category.name,option)"
+                        ng-click="toggleSelect(category.name,option)">
+                    {{option}}
+                </button>
+            </div>
+        </div>
+        <div>运算用时(毫秒)：{{time}} </div>
+        <div>//显示列表更新效率受渲染效率的影响较大，所以实际更新时间>>运算时间</div>
+        <div>
+            <div>items:</div>
+            <div class="item" ng-repeat="itemIndex in ItemsManager.selectedItems">
+                <div><b>{{ItemsManager.items[itemIndex]['name']}}</b></div>
+                <ul>
+                    <li>brand:{{ItemsManager.items[itemIndex]['brand']}}</li>
+                    <li>size:{{ItemsManager.items[itemIndex]['size']}}</li>
+                    <li>gender:{{ItemsManager.items[itemIndex]['gender']}}</li>
+                    <li>color:{{ItemsManager.items[itemIndex]['color']}}</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <!--<script type="text/javascript" src="script/data.js"></script>-->
+    <script type="text/javascript" src="script/selector.js"></script>
+</body>
+</html>
+
