@@ -204,6 +204,11 @@ angular.module("selector", [
       this._initValidVector();
     },
     select: function (name, option) {
+      //Vector.unselect();
+      var curSelect = _.findWhere(this.CategoryBar.flatCategory, {name:name,state:OptionType.SELECTED});
+      if (curSelect) {
+        this.unselect(curSelect.name, curSelect.option);
+      }
       Vector.setOne(CategoryBar.selectedVector, _.findIndex(this.CategoryBar.flatCategory, {name:name,option:option}));
       var newSelectedItems = [];
       var newValidVector = Vector.init(this.vectorLength, []);
